@@ -19,14 +19,18 @@ class UserController extends Controller
     {
         $user = User::where('email', $request->email)->first();
 
-        //IF USER EXISTS AND PASSWORD VERIFICATION IS VALID
-        if ($user && Hash::check($request->password, $user->password) === TRUE) {
-            //RETURN TOKEN
-            $token =  $user->createToken($user->name . '-' . $user->email);
-            return response()->json(['token' => $token->plainTextToken], 401);
+        if (!$user) 
+        {
+            return response()->json('Credenciais inválidas', 400);
         }
-        //RETURN FORBIDDEN STATUS
-        return response()->json('Login inválido', 401);
+        
+        if (!Hash::check($request->password, $user->password)) 
+        {
+            return response()->json('Login inválido', 401);
+        }
+
+        $token =  $user->createToken($user->name . '-' . $user->email);
+        return response()->json(['token' => $token->plainTextToken], 401);
     }
 
     /**
@@ -37,5 +41,21 @@ class UserController extends Controller
     public function me(Request $request): JsonResponse
     {
         return response()->json($request->user(), 200);
+    }
+    
+    /**
+     * Encerrar sessão do usuário autenticado 
+     * @param \Illuminate\Http\Request $request    
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request): JsonResponse
+    {
+        if (!$request->user()) 
+        {
+            return response()->json('Token inválido', 401);
+        }
+
+        $request->user()->currentAccessToken()->delete();
+        return response()->json('Sessão encerrada com sucesso!', 200);
     }
 }
