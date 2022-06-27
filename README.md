@@ -17,4 +17,5 @@ php artisan db:seed UserDefaultSeeder
 
 # Documentação
 Obtenha a documentação da API em um projeto Postman no link abaixo:
+
 https://documenter.getpostman.com/view/16341103/UzBtkNZS
