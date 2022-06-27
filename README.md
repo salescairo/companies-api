@@ -1,7 +1,7 @@
 # COMPANIES API - LARAVEL SANCTUM IMPLEMENTATION
 Essa é uma api Laravel exemplo para o recurso de empresas com o objetivo de demonstrar uma implementação do sanctum para aplicações SPA.
 
-# 🔧 Instalação
+# Instalação
 Copie e cole o arquivo .env.example para o arquivo .env e configure as variáveis de banco de dados (DB_*)
 
 Configure a estrutura básica do banco de dados:
@@ -14,3 +14,7 @@ Adicione um usuário padrão
 ```
 php artisan db:seed UserDefaultSeeder
 ```
+
+# Documentação
+Obtenha a documentação da API em um projeto Postman no link abaixo:
+https://documenter.getpostman.com/view/16341103/UzBtkNZS
