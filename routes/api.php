@@ -19,4 +19,6 @@ Route::post('login',[App\Http\Controllers\UserController::class,'login'])->name(
 Route::group(['middleware'=>'auth:sanctum'],function($route){
     Route::post('logout',[App\Http\Controllers\UserController::class,'logout'])->name('logout');
     Route::get('me',[App\Http\Controllers\UserController::class,'me'])->name('me');
+
+    Route::apiResource('companies', App\Http\Controllers\CompanyController::class)->names('company');
 });
